@@ -19,7 +19,8 @@ const int CURRENT_MODE = HELL_MODE;
 //==============================================================================
 /**
 */
-class KhaosAudioProcessorEditor  : public juce::AudioProcessorEditor
+class KhaosAudioProcessorEditor  : public juce::AudioProcessorEditor,
+    public juce::FileDragAndDropTarget
 {
 public:
     KhaosAudioProcessorEditor (KhaosAudioProcessor&);
@@ -29,11 +30,15 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    bool isInterestedInFileDrag(const juce::StringArray& files) override;
+    void filesDropped(const juce::StringArray& files, int x, int y) override;
+
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     KhaosAudioProcessor& audioProcessor;
     juce::Slider khaosSlider;
+    juce::ArrowButton modeButtonLeft, modeButtonRight;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KhaosAudioProcessorEditor)
 };

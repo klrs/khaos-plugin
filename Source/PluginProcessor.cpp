@@ -22,10 +22,18 @@ KhaosAudioProcessor::KhaosAudioProcessor()
                        )
 #endif
 {
+    mFormatManager.registerBasicFormats();
+    outputBuffer = juce::AudioSampleBuffer(2, 512);
+
+    for(int i = 0; i < mNumVoices; i++)
+    {
+        mSampler.addVoice(new juce::SamplerVoice());
+    }
 }
 
 KhaosAudioProcessor::~KhaosAudioProcessor()
 {
+    mFormatReader = nullptr;
 }
 
 //==============================================================================
@@ -95,6 +103,7 @@ void KhaosAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    mSampler.setCurrentPlaybackSampleRate(sampleRate);
 }
 
 void KhaosAudioProcessor::releaseResources()
@@ -160,14 +169,16 @@ void KhaosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
         break;
 
     }
+
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer(channel);
+        auto* sampleChannelData = outputBuffer.getWritePointer(channel);
         const int numSamples = buffer.getNumSamples();
 
         for (int i = 0; i < numSamples; i++)
         {
-            channelData[i] = channelData[i] * 1.2f;
+            channelData[i] = channelData[i] * sampleChannelData[i];
         }
 
         // ..do something to the data...
@@ -197,6 +208,21 @@ void KhaosAudioProcessor::setStateInformation (const void* data, int sizeInBytes
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+}
+
+void KhaosAudioProcessor::loadFile(const juce::String& path)
+{
+    mSampler.clearSounds();
+
+    auto file = juce::File(path);
+    mFormatReader = mFormatManager.createReaderFor(file);
+
+    juce::BigInteger range;
+    range.setRange(0, 128, true);
+
+    outputBuffer.clear();
+
+    mFormatReader->read(&outputBuffer, 0, juce::jmin((int)mFormatReader->lengthInSamples, 512), 0, true, true);
 }
 
 //==============================================================================

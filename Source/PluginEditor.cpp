@@ -22,6 +22,7 @@ KhaosAudioProcessorEditor::KhaosAudioProcessorEditor (KhaosAudioProcessor& p)
     khaosSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
 
     addAndMakeVisible(&khaosSlider);
+    addAndMakeVisible(&modeButtonRight);
 }
 
 KhaosAudioProcessorEditor::~KhaosAudioProcessorEditor()
@@ -37,6 +38,9 @@ void KhaosAudioProcessorEditor::paint (juce::Graphics& g)
     g.setColour(juce::Colours::white);
     g.setFont(50.0f);
     g.drawFittedText("KHAOS", getLocalBounds(), juce::Justification::centredTop, 1);
+    if (audioProcessor.getNumSamplerSounds() > 0) {
+        g.drawFittedText("Sample loaded", getLocalBounds(), juce::Justification::centredBottom, 1);
+    }
 }
 
 void KhaosAudioProcessorEditor::resized()
@@ -48,4 +52,30 @@ void KhaosAudioProcessorEditor::resized()
     auto area = getLocalBounds();
     auto dialArea = area.removeFromTop(area.getHeight());
     khaosSlider.setBounds(dialArea.reduced(border, border));
+}
+
+bool KhaosAudioProcessorEditor::isInterestedInFileDrag(const juce::StringArray& files)
+{
+    for (auto file : files)
+    {
+        if (file.endsWithIgnoreCase("wav") || file.endsWithIgnoreCase("mp3") || file.endsWithIgnoreCase("aif"))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void KhaosAudioProcessorEditor::filesDropped(const juce::StringArray& files, int x, int y)
+{
+    for (auto file : files)
+    {
+        if (isInterestedInFileDrag(files))
+        {
+            audioProcessor.loadFile(file);
+        }
+    }
+
+    repaint();
 }
