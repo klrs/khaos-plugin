@@ -22,7 +22,6 @@ KhaosAudioProcessorEditor::KhaosAudioProcessorEditor (KhaosAudioProcessor& p)
     khaosSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
 
     addAndMakeVisible(&khaosSlider);
-    addAndMakeVisible(&modeButtonRight);
 }
 
 KhaosAudioProcessorEditor::~KhaosAudioProcessorEditor()

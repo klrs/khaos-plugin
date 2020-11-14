@@ -38,7 +38,7 @@ private:
     // access the processor object that created it.
     KhaosAudioProcessor& audioProcessor;
     juce::Slider khaosSlider;
-    juce::ArrowButton modeButtonLeft, modeButtonRight;
+    //juce::ArrowButton modeButtonLeft, modeButtonRight;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KhaosAudioProcessorEditor)
 };

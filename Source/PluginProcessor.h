@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "DelayLine.h"
 
 //==============================================================================
 /**
@@ -64,6 +65,8 @@ private:
     juce::AudioFormatManager mFormatManager;
     juce::AudioFormatReader* mFormatReader{ nullptr };
     juce::AudioSampleBuffer outputBuffer;
+
+    std::unique_ptr<Effect> delayLine;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KhaosAudioProcessor)
