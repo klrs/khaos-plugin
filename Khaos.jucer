@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="xyrLeu" name="Khaos">
     <GROUP id="{CB5615FA-B2DD-0BFC-66D4-9AACBE25312D}" name="Source">
+      <FILE id="TtIQgw" name="SineOscillator.cpp" compile="1" resource="0"
+            file="Source/SineOscillator.cpp"/>
+      <FILE id="BhmP1f" name="SineOscillator.h" compile="0" resource="0"
+            file="Source/SineOscillator.h"/>
       <FILE id="SIP2fq" name="Effect.h" compile="0" resource="0" file="Source/Effect.h"/>
       <FILE id="DR6qm3" name="DelayLine.cpp" compile="1" resource="0" file="Source/DelayLine.cpp"/>
       <FILE id="ttmIj2" name="DelayLine.h" compile="0" resource="0" file="Source/DelayLine.h"/>
