@@ -66,7 +66,9 @@ private:
     juce::AudioFormatReader* mFormatReader{ nullptr };
     juce::AudioSampleBuffer outputBuffer;
 
-    std::unique_ptr<Effect> delayLine;
+    std::unique_ptr<Effect> delayLine1;
+    std::unique_ptr<Effect> testEffect1;
+    std::unique_ptr<Effect> comp;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KhaosAudioProcessor)

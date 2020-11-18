@@ -6,6 +6,7 @@
   ==============================================================================
 */
 
+#include "globals.h"
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -18,14 +19,19 @@ KhaosAudioProcessorEditor::KhaosAudioProcessorEditor (KhaosAudioProcessor& p)
     setSize (400, 300);
 
     khaosSlider.setSliderStyle(juce::Slider::Rotary);
-    khaosSlider.setRange(0.0, 127.0, 1.0);
+    khaosSlider.setRange(0.0, 1.0, 0.01f);
     khaosSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    khaosSlider.addListener(this);
 
     addAndMakeVisible(&khaosSlider);
 }
 
 KhaosAudioProcessorEditor::~KhaosAudioProcessorEditor()
 {
+}
+
+double KhaosAudioProcessorEditor::getKhaosValue() {
+    return khaosSlider.getValue();
 }
 
 //==============================================================================
@@ -51,7 +57,15 @@ void KhaosAudioProcessorEditor::resized()
     auto area = getLocalBounds();
     auto dialArea = area.removeFromTop(area.getHeight());
     khaosSlider.setBounds(dialArea.reduced(border, border));
+
 }
+
+void KhaosAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
+{
+    if (slider == &khaosSlider)
+        G_KHAOS_VAR = slider->getValue();
+}
+
 
 bool KhaosAudioProcessorEditor::isInterestedInFileDrag(const juce::StringArray& files)
 {

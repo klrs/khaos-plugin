@@ -29,7 +29,7 @@ public:
 
 private:
 
-    juce::AudioBuffer<float>* buffer;
+    std::unique_ptr<juce::AudioBuffer<float>> buffer;
 
     int writehead;
     const int maxNumSamples;

@@ -1,3 +1,4 @@
+#include "globals.h"
 #include "DelayLine.h"
 
 // Wrap an integer to a range
@@ -13,20 +14,21 @@ int wrapToRange(int number, int min, int max)
 DelayLine::DelayLine(int numSamplesForTheDelayLine)
     : maxNumSamples(numSamplesForTheDelayLine)
 {
-    buffer = new juce::AudioBuffer<float>(1, maxNumSamples);
+   // buffer = new juce::AudioBuffer<float>(1, maxNumSamples);
+    buffer.reset(new juce::AudioBuffer<float>(1, maxNumSamples));
     writehead = 0;
-    buffer->clear();
+    buffer.get()->clear();
 }
 
 DelayLine::~DelayLine()
 {
-    delete buffer;
+    buffer.release();
 }
 
 float DelayLine::process(float sample)
 {
     pushSample(sample);
-    return sample + getDelayedSample(0);
+    return sample + getDelayedSampleInterp(20000) * G_KHAOS_VAR;
 }
 
 void DelayLine::pushSample(float sample)

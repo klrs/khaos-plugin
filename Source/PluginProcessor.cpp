@@ -9,6 +9,8 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "DelayLine.h"
+#include "Test.h"
+#include "Compressor.h"
 
 //==============================================================================
 KhaosAudioProcessor::KhaosAudioProcessor()
@@ -106,7 +108,9 @@ void KhaosAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 
     //effects.push_back(std::move(delayLine));
 
-    delayLine.reset(new DelayLine(maxDelayLineInSamples));
+    delayLine1.reset(new DelayLine(maxDelayLineInSamples));
+    testEffect1.reset(new Test());
+    comp.reset(new Compressor());
 
     mSampler.setCurrentPlaybackSampleRate(sampleRate);
 }
@@ -115,6 +119,7 @@ void KhaosAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+    delayLine1.release();
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -150,7 +155,7 @@ void KhaosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    for (int channel = 0; channel < 1; ++channel)
     {
         auto* channelData = buffer.getWritePointer(channel);
         auto* sampleChannelData = outputBuffer.getWritePointer(channel);
@@ -158,8 +163,8 @@ void KhaosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
         for (int i = 0; i < numSamples; i++)
         {
-            //iterator based range - emulated C pointer shift 
-            channelData[i] = delayLine.get()->process(channelData[i]);
+            channelData[i] = delayLine1.get()->process(channelData[i]);
+            channelData[i] = comp.get()->process(channelData[i]);
         }
     }
 }

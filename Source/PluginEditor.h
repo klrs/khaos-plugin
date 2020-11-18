@@ -20,7 +20,7 @@ const int CURRENT_MODE = HELL_MODE;
 /**
 */
 class KhaosAudioProcessorEditor  : public juce::AudioProcessorEditor,
-    public juce::FileDragAndDropTarget
+    public juce::FileDragAndDropTarget, public juce::Slider::Listener
 {
 public:
     KhaosAudioProcessorEditor (KhaosAudioProcessor&);
@@ -32,6 +32,10 @@ public:
 
     bool isInterestedInFileDrag(const juce::StringArray& files) override;
     void filesDropped(const juce::StringArray& files, int x, int y) override;
+
+    void sliderValueChanged(juce::Slider* slider) override;
+
+    double getKhaosValue();
 
 private:
     // This reference is provided as a quick way for your editor to
