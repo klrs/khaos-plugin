@@ -11,6 +11,8 @@
 #include "DelayLine.h"
 #include "Test.h"
 #include "Compressor.h"
+#include "Reverb.h"
+#include "NGate.h"
 
 //==============================================================================
 KhaosAudioProcessor::KhaosAudioProcessor()
@@ -111,6 +113,8 @@ void KhaosAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     delayLine1.reset(new DelayLine(maxDelayLineInSamples));
     testEffect1.reset(new Test());
     comp.reset(new Compressor());
+    reverb.reset(new Reverb(maxDelayLineInSamples));
+    nGate.reset(new NGate(maxDelayLineInSamples, samplesPerBlock));
 
     mSampler.setCurrentPlaybackSampleRate(sampleRate);
 }
@@ -163,8 +167,11 @@ void KhaosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
         for (int i = 0; i < numSamples; i++)
         {
+            
             channelData[i] = delayLine1.get()->process(channelData[i]);
             channelData[i] = comp.get()->process(channelData[i]);
+            channelData[i] = reverb.get()->process(channelData[i]);
+            channelData[i] = nGate.get()->process(channelData[i]);
         }
     }
 }

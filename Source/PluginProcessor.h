@@ -69,6 +69,8 @@ private:
     std::unique_ptr<Effect> delayLine1;
     std::unique_ptr<Effect> testEffect1;
     std::unique_ptr<Effect> comp;
+    std::unique_ptr<Effect> reverb;
+    std::unique_ptr<Effect> nGate;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KhaosAudioProcessor)

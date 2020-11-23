@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="xyrLeu" name="Khaos">
     <GROUP id="{CB5615FA-B2DD-0BFC-66D4-9AACBE25312D}" name="Source">
+      <FILE id="dkEDhf" name="NGate.cpp" compile="1" resource="0" file="Source/NGate.cpp"/>
+      <FILE id="hlU202" name="NGate.h" compile="0" resource="0" file="Source/NGate.h"/>
+      <FILE id="oKbJBs" name="Reverb.cpp" compile="1" resource="0" file="Source/Reverb.cpp"/>
+      <FILE id="OxpSy7" name="Reverb.h" compile="0" resource="0" file="Source/Reverb.h"/>
       <FILE id="Kp7ByY" name="globals.cpp" compile="1" resource="0" file="Source/globals.cpp"/>
       <FILE id="kOa3Xz" name="globals.h" compile="0" resource="0" file="Source/globals.h"/>
       <FILE id="etYcEC" name="CircularBuffer.cpp" compile="1" resource="0"
@@ -46,6 +50,7 @@
         <MODULEPATH id="juce_graphics" path="../../../../TOOLS/juce/juce-6.0.4-windows/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../../TOOLS/juce/juce-6.0.4-windows/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../../../TOOLS/juce/juce-6.0.4-windows/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../../TOOLS/juce/juce-6.0.4-windows/JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
   </EXPORTFORMATS>
@@ -59,6 +64,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
