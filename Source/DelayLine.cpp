@@ -14,7 +14,6 @@ int wrapToRange(int number, int min, int max)
 DelayLine::DelayLine(int numSamplesForTheDelayLine)
     : maxNumSamples(numSamplesForTheDelayLine)
 {
-   // buffer = new juce::AudioBuffer<float>(1, maxNumSamples);
     buffer.reset(new juce::AudioBuffer<float>(1, maxNumSamples));
     writehead = 0;
     buffer.get()->clear();
@@ -25,10 +24,10 @@ DelayLine::~DelayLine()
     buffer.release();
 }
 
-float DelayLine::process(float sample)
+float DelayLine::process(float sample, float khaosParam, float sineSample)
 {
-    pushSample(sample);
-    return sample + getDelayedSampleInterp(20000) * G_KHAOS_VAR;
+    pushSample(sineSample * sample);
+    return sample + getDelayedSampleInterp(20000) * khaosParam;
 }
 
 void DelayLine::pushSample(float sample)

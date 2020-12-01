@@ -18,11 +18,11 @@ Reverb::Reverb(const double sampleRate)
 
 Reverb::~Reverb() {}
 
-float Reverb::process(float sample)
+float Reverb::process(float sample, float khaosVal, float sineSample)
 {
     float processedSample = sample;
     reverb.processMono(&processedSample, 1);
-    return sample + processedSample * G_KHAOS_VAR;
+    return sample + (processedSample * sineSample) * khaosVal;
 }
 
 

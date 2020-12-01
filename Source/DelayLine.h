@@ -25,12 +25,11 @@ public:
     // Get a sample, but interpolated. We need to use this if the delay read tap moves
     float getDelayedSampleInterp(float delayInSamples);
 
-    float process(float sample);
+    float process(float sample, float khaosParam, float sineSample);
 
 private:
 
     std::unique_ptr<juce::AudioBuffer<float>> buffer;
-
     int writehead;
     const int maxNumSamples;
 };

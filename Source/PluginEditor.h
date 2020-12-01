@@ -11,16 +11,10 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
-const int HELL_MODE = 0;
-const int OCEAN_MODE = 1;
-const int SKY_MODE = 2;
-const int CURRENT_MODE = HELL_MODE;
-
 //==============================================================================
 /**
 */
-class KhaosAudioProcessorEditor  : public juce::AudioProcessorEditor,
-    public juce::FileDragAndDropTarget, public juce::Slider::Listener
+class KhaosAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
     KhaosAudioProcessorEditor (KhaosAudioProcessor&);
@@ -30,19 +24,36 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
-    bool isInterestedInFileDrag(const juce::StringArray& files) override;
-    void filesDropped(const juce::StringArray& files, int x, int y) override;
-
-    void sliderValueChanged(juce::Slider* slider) override;
-
-    double getKhaosValue();
-
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     KhaosAudioProcessor& audioProcessor;
     juce::Slider khaosSlider;
-    //juce::ArrowButton modeButtonLeft, modeButtonRight;
+    juce::Slider freqSlider;
+    juce::Slider amplSlider;
+
+    //compressor
+    juce::Slider compTreshSlider;
+    juce::Slider compRatioSlider;
+    juce::Slider compAttackSlider;
+    juce::Slider compReleaseSlider;
+    juce::Slider compKneeSlider;
+
+    //noisegate
+    juce::Slider gateAttackSlider;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KhaosAudioProcessorEditor)
+
+public:
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> khaosSliderValue;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> freqSliderValue;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> amplSliderValue;
+
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> compTreshSliderValue;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> compRatioSliderValue;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> compAttackSliderValue;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> compReleaseSliderValue;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> compKneeSliderValue;
+
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> gateAttackSliderValue;
 };

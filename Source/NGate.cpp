@@ -23,7 +23,7 @@ NGate::NGate(double sampleRate, double blockSize)
 
 NGate::~NGate() {}
 
-float NGate::process(float sample)
+float NGate::process(float sample, float khaos, float sineSample)
 {
-    return sample + noiseGate->processSample(0, sample) * G_KHAOS_VAR;
+    return sample + noiseGate->processSample(0, sample) * khaos;
 }

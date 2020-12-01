@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="xyrLeu" name="Khaos">
     <GROUP id="{CB5615FA-B2DD-0BFC-66D4-9AACBE25312D}" name="Source">
+      <FILE id="Vs2Tsv" name="SineOscillator.cpp" compile="1" resource="0"
+            file="Source/SineOscillator.cpp"/>
+      <FILE id="vfirC4" name="SineOscillator.h" compile="0" resource="0"
+            file="Source/SineOscillator.h"/>
       <FILE id="dkEDhf" name="NGate.cpp" compile="1" resource="0" file="Source/NGate.cpp"/>
       <FILE id="hlU202" name="NGate.h" compile="0" resource="0" file="Source/NGate.h"/>
       <FILE id="oKbJBs" name="Reverb.cpp" compile="1" resource="0" file="Source/Reverb.cpp"/>

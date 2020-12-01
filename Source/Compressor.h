@@ -11,10 +11,10 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "Effect.h"
+#include "Compressor.h"
 #include "CircularBuffer.h"
 
-class Compressor : public Effect
+class Compressor
 {
 public:
 
@@ -25,7 +25,7 @@ public:
     // destructor
     ~Compressor();
 
-    float process(float sample);
+    float process(float sample, float khaos, float sineSample);
 
 private:
     float compressSample(float data, float thresh, float ratio, float attack, float release, float knee);

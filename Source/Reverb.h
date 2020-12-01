@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Effect.h"
 
-class Reverb : public Effect
+class Reverb
 {
 public:
 
@@ -24,7 +24,7 @@ public:
     // destructor
     ~Reverb();
 
-    float process(float sample);
+    float process(float sample, float khaosVal, float sineSample);
 
 private:
     juce::Reverb reverb;

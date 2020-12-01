@@ -14,7 +14,7 @@
 #include "juce_dsp/juce_dsp.h"
 #include "Effect.h"
 
-class NGate : public Effect
+class NGate
 {
 public:
 
@@ -25,7 +25,7 @@ public:
     // destructor
     ~NGate();
 
-    float process(float sample);
+    float process(float sample, float khaos, float sineSample);
 
 private:
     std::unique_ptr<juce::dsp::NoiseGate<float>> noiseGate;

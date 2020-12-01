@@ -11,16 +11,20 @@
 #include "Compressor.h"
 #include "globals.h"
 
-Compressor::Compressor() {
+Compressor::Compressor()
+{
     buffer = CircularBuffer(150, 20);
-    tav = 0.01;
+    tav = 0.05;
     rms = 0;
     gain = 1;
 }
 
-float Compressor::process(float sample) {
-    //return sample;
-    return sample + (compressSample(sample, -20.0f, 10.0f, 0.01f, 0.2f, 1.0f) * G_KHAOS_VAR);
+Compressor::~Compressor()
+{
+}
+
+float Compressor::process(float sample, float khaos, float sineSample) {
+    return sample + ((compressSample(sample * sineSample, -30.0f, 20.0f, 0.01f, 0.4f, 0.0f)) * khaos);
 }
 
 float Compressor::compressSample(float data, float thresh, float ratio, float attack, float release, float knee) {

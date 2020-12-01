@@ -10,6 +10,10 @@
 
 #include <JuceHeader.h>
 #include "DelayLine.h"
+#include "Compressor.h"
+#include "Reverb.h"
+#include "NGate.h"
+#include "SineOscillator.h"
 
 //==============================================================================
 /**
@@ -58,6 +62,9 @@ public:
 
     int getNumSamplerSounds() { return mSampler.getNumSounds(); }
 
+    juce::AudioProcessorValueTreeState treeState;
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+
 private:
     juce::Synthesiser mSampler;
     const int mNumVoices{ 3 };
@@ -66,11 +73,11 @@ private:
     juce::AudioFormatReader* mFormatReader{ nullptr };
     juce::AudioSampleBuffer outputBuffer;
 
-    std::unique_ptr<Effect> delayLine1;
-    std::unique_ptr<Effect> testEffect1;
-    std::unique_ptr<Effect> comp;
-    std::unique_ptr<Effect> reverb;
-    std::unique_ptr<Effect> nGate;
+    std::unique_ptr<SineOscillator> sineOscillator;
+    std::unique_ptr<DelayLine> delayLine1;
+    std::unique_ptr<Compressor> comp;
+    std::unique_ptr<Reverb> reverb;
+    std::unique_ptr<NGate> nGate;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KhaosAudioProcessor)
